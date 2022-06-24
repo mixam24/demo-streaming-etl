@@ -12,7 +12,7 @@ The idea behind this workshop/lab guide is to provide a complete walk through of
 The core Confluent Cloud components that will be used to accomplish this will be:
 - Kafka Connect
 - Kafka
-- KsqlDB
+- ksqlDB
 - Schema Registry
 
 You can use this repository to create your own demo. All of the steps and code needed are included. If something's missing, please let us know! 
@@ -233,9 +233,9 @@ Launch the connector. Once both are fully provisioned, check for and troubleshoo
 
 ***
 
-### Ksql 
+### ksqlDB 
 
-If all is well, it's time to transform and join your data using Ksql. Ensure your topics are receiving records first.
+If all is well, it's time to transform and join your data using ksqlDB. Ensure your topics are receiving records first.
 
 1. Enter each of the following queries in the 
 
@@ -268,7 +268,7 @@ If all is well, it's time to transform and join your data using Ksql. Ensure you
         EMIT CHANGES;
     ```
 
-1. With the `customers` records flattened, you can pass them into a Ksql table that updates the latest value provided for each field.
+1. With the `customers` records flattened, you can pass them into a ksqlDB table that updates the latest value provided for each field.
     ```sql
         CREATE TABLE customers WITH (
                 KAFKA_TOPIC='customers',
@@ -315,7 +315,7 @@ If all is well, it's time to transform and join your data using Ksql. Ensure you
         EMIT CHANGES;
     ```
 
-1. Create a Ksql table to present the the latest values by demographics. 
+1. Create a ksqlDB table to present the the latest values by demographics. 
     ```sql
         CREATE TABLE demographics WITH (
                 KAFKA_TOPIC='demographics',
@@ -380,7 +380,7 @@ If all is well, it's time to transform and join your data using Ksql. Ensure you
         EMIT CHANGES;
     ```
 
-1. Create a Ksql table to show the most up-to-date values for each `products` record. 
+1. Create a ksqlDB table to show the most up-to-date values for each `products` record. 
     ```sql 
         CREATE TABLE products WITH (
                 KAFKA_TOPIC='products',
@@ -427,7 +427,7 @@ If all is well, it's time to transform and join your data using Ksql. Ensure you
         EMIT CHANGES;
     ```
 
-1. You're now ready to create a Ksql stream that joins these tables together to create enriched order data in real time. 
+1. You're now ready to create a ksqlDB stream that joins these tables together to create enriched order data in real time. 
     ```sql
         CREATE STREAM orders_enriched WITH (
                 KAFKA_TOPIC='orders_enriched',
@@ -446,7 +446,7 @@ If all is well, it's time to transform and join your data using Ksql. Ensure you
     ```
     > **Note:** *We need a stream to 'hydrate' our data warehouse once the sink connector is set up. 
 
-Verify that you have a working Ksql topology. You can inspect it by selecting the **Flow** tab in the Ksql cluster. Check to see that records are populating the `orders_enriched` kstream.
+Verify that you have a working ksqlDB topology. You can inspect it by selecting the **Flow** tab in the ksqlDB cluster. Check to see that records are populating the `orders_enriched` kstream.
 
 ***
 
@@ -582,7 +582,7 @@ Experiment to your heart's desire with the data in Databricks. For example, you 
 **Delete everything you provisioned** in this lab to avoid further usage charges. If you want to keep your work but minimize uptime cost, pause your connectors.
 
 ### Confluent Cloud resources to remove
-- Ksql Cluster
+- ksqlDB Cluster
 - Delta Lake Sink Connector
 - Postgres CDC Source Connector
 - Mysql CDC Source Connector

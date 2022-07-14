@@ -290,13 +290,13 @@ If all is well, it's time to transform and join your data using ksqlDB. Ensure y
 1. Repeat the process above for the `demographics` table.
 
    ```sql
-       CREATE STREAM demographics_stream WITH (KAFKA_TOPIC='mysql.customers.demographics', KEY_FORMAT='JSON', VALUE_FORMAT='JSON_SR');
+    CREATE STREAM demographics_stream WITH (KAFKA_TOPIC='mysql.customers.demographics', KEY_FORMAT='JSON', VALUE_FORMAT='JSON_SR');
    ```
 
 1. Verify `demographics_stream` stream is populated correctly and then hit **Stop**.
 
    ```sql
-       SELECT * FROM demographics_stream EMIT CHANGES;
+    SELECT * FROM demographics_stream EMIT CHANGES;
    ```
 
 1. Create a ksqlDB table to present the the latest values by demographics.
@@ -376,10 +376,10 @@ If all is well, it's time to transform and join your data using ksqlDB. Ensure y
 1. Create a ksqlDB table to show the most up-to-date values for each `products` record.
 
    ```sql
-       CREATE TABLE products WITH (
-        KAFKA_TOPIC='products',
-        KEY_FORMAT='JSON',
-        VALUE_FORMAT='JSON_SR'
+    CREATE TABLE products WITH (
+    KAFKA_TOPIC='products',
+    KEY_FORMAT='JSON',
+    VALUE_FORMAT='JSON_SR'
     ) AS
         SELECT
             product_id,
@@ -389,7 +389,7 @@ If all is well, it's time to transform and join your data using ksqlDB. Ensure y
             LATEST_BY_OFFSET(price) price
         FROM products_rekeyed
         GROUP BY product_id
-   EMIT CHANGES;
+    EMIT CHANGES;
    ```
 
 1. Verify the `products` table is populated correctly.
@@ -434,10 +434,10 @@ If all is well, it's time to transform and join your data using ksqlDB. Ensure y
    ```
 1. You're now ready to create a ksqlDB stream that joins these tables together to create enriched order data in real time.
    ```sql
-       CREATE STREAM orders_enriched WITH (
-        KAFKA_TOPIC='orders_enriched',
-        KEY_FORMAT='JSON',
-        VALUE_FORMAT='JSON_SR'
+    CREATE STREAM orders_enriched WITH (
+    KAFKA_TOPIC='orders_enriched',
+    KEY_FORMAT='JSON',
+    VALUE_FORMAT='JSON_SR'
     ) AS
         SELECT
             o.order_key AS `order_key`,

@@ -2,6 +2,8 @@
 clipboard.file
 notes
 .config
+*.p8
+*.pub
 
 # shell
 env.sh
